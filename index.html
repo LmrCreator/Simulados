@@ -3,15 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plataforma de Estudos - Versão Auxiliar Veterinário</title>
+    <title>Plataforma de Estudos - Preparatório Militar (Elite)</title>
     <style>
         :root {
-            --primary: #2c7a7b;
-            --secondary: #4fd1c5;
-            --bg: #f0fdfa;
+            --primary: #1a365d;
+            --secondary: #2b6cb0;
+            --bg: #f7fafc;
             --text: #2d3748;
             --light: #ffffff;
             --border: #e2e8f0;
+            --success: #48bb78;
+            --warning: #ecc94b;
+            --danger: #f56565;
         }
 
         body {
@@ -23,7 +26,7 @@
         }
 
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
             background: var(--light);
             padding: 20px 30px;
@@ -45,13 +48,14 @@
             margin-bottom: 30px;
             border-bottom: 2px solid var(--border);
             padding-bottom: 10px;
+            flex-wrap: wrap;
         }
 
         .tab-btn {
             background: transparent;
             border: none;
-            padding: 10px 20px;
-            font-size: 16px;
+            padding: 10px 15px;
+            font-size: 15px;
             font-weight: bold;
             color: var(--text);
             cursor: pointer;
@@ -59,24 +63,15 @@
             transition: 0.3s;
         }
 
-        .tab-btn:hover {
-            background: var(--bg);
-        }
-
-        .tab-btn.active {
-            background: var(--primary);
-            color: var(--light);
-        }
+        .tab-btn:hover { background: var(--bg); }
+        .tab-btn.active { background: var(--primary); color: var(--light); }
 
         /* Tab Content */
         .tab-content {
             display: none;
             animation: fadeIn 0.4s ease-in-out;
         }
-
-        .tab-content.active {
-            display: block;
-        }
+        .tab-content.active { display: block; }
 
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
@@ -84,22 +79,9 @@
         }
 
         /* Quiz Styles */
-        .question-container {
-            margin-bottom: 20px;
-        }
-
-        .question-text {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 15px;
-        }
-
-        .options {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
+        .question-container { margin-bottom: 20px; }
+        .question-text { font-size: 18px; font-weight: 600; margin-bottom: 15px; }
+        .options { display: flex; flex-direction: column; gap: 10px; }
         .option-btn {
             background: var(--bg);
             border: 2px solid var(--border);
@@ -110,24 +92,10 @@
             cursor: pointer;
             transition: 0.2s;
         }
-
-        .option-btn:hover {
-            border-color: var(--secondary);
-        }
-
-        .option-btn.correct {
-            background: #c6f6d5;
-            border-color: #48bb78;
-        }
-
-        .option-btn.wrong {
-            background: #fed7d7;
-            border-color: #f56565;
-        }
-
-        .option-btn:disabled {
-            cursor: not-allowed;
-        }
+        .option-btn:hover { border-color: var(--secondary); }
+        .option-btn.correct { background: #c6f6d5; border-color: var(--success); }
+        .option-btn.wrong { background: #fed7d7; border-color: var(--danger); }
+        .option-btn:disabled { cursor: not-allowed; }
 
         #next-btn, #restart-btn {
             margin-top: 20px;
@@ -141,50 +109,57 @@
             display: none;
             width: 100%;
         }
+        #next-btn:hover, #restart-btn:hover { background: var(--secondary); }
 
-        #next-btn:hover, #restart-btn:hover {
-            background: #235d5e;
-        }
-
-        /* Game Styles */
-        .game-grid {
+        /* TAF Form Styles */
+        .taf-form {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: 1fr 1fr;
             gap: 15px;
-        }
-
-        .card {
             background: var(--bg);
-            border: 2px solid var(--border);
-            padding: 15px;
-            text-align: center;
+            padding: 20px;
             border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: 0.3s;
-            user-select: none;
+            border: 1px solid var(--border);
         }
 
-        .card:hover {
-            background: var(--secondary);
-            color: white;
+        .form-group { display: flex; flex-direction: column; }
+        .form-group label { font-weight: bold; margin-bottom: 5px; font-size: 14px; }
+        .form-group input, .form-group select {
+            padding: 10px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 15px;
         }
-
-        .card.selected {
+        .form-group.highlight {
+            background: #e6fffa;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px dashed var(--success);
+        }
+        
+        .gerar-btn {
+            grid-column: span 2;
             background: var(--primary);
             color: white;
-            border-color: var(--primary);
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .gerar-btn:hover { background: var(--secondary); }
+
+        #taf-result {
+            margin-top: 20px;
+            padding: 15px;
+            background: #e6fffa;
+            border-left: 4px solid var(--success);
+            border-radius: 4px;
+            display: none;
         }
 
-        .card.matched {
-            background: #c6f6d5;
-            color: #276749;
-            border-color: #48bb78;
-            cursor: default;
-            pointer-events: none;
-        }
-
-        /* Dissertativas Styles */
+        /* Dissertativas / Perfil */
         .dissertativa-item {
             margin-bottom: 30px;
             background: var(--bg);
@@ -192,61 +167,67 @@
             border-radius: 8px;
             border: 1px solid var(--border);
         }
-
-        .dissertativa-item h3 {
-            margin-top: 0;
-            font-size: 16px;
-            color: var(--primary);
-        }
-
+        .dissertativa-item h3 { margin-top: 0; font-size: 16px; color: var(--primary); }
         textarea {
             width: 100%;
-            height: 80px;
+            height: 120px;
             margin-top: 10px;
             padding: 10px;
             border-radius: 6px;
             border: 1px solid var(--border);
             font-family: inherit;
+            font-size: 14px;
             resize: vertical;
             box-sizing: border-box;
         }
-
-        .show-answer-btn {
+        .analisar-btn {
             margin-top: 10px;
             background: var(--secondary);
             color: white;
             border: none;
-            padding: 8px 15px;
+            padding: 10px 15px;
             border-radius: 6px;
             cursor: pointer;
+            font-weight: bold;
+            width: 100%;
         }
-
-        .answer-box {
+        .analisar-btn:hover { background: var(--primary); }
+        
+        .feedback-box {
             display: none;
             margin-top: 15px;
             padding: 15px;
-            background: #e6fffa;
-            border-left: 4px solid var(--primary);
+            background: #ebf8ff;
+            border-left: 4px solid var(--secondary);
             border-radius: 4px;
             font-size: 14px;
         }
-
+        .score-badge {
+            display: inline-block;
+            padding: 5px 10px;
+            background: var(--primary);
+            color: white;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>📚 Estudos: Auxiliar Veterinário</h1>
+    <h1>🎖️️ Plataforma de Estudos - Preparatório Elite</h1>
     
     <div class="tabs">
-        <button class="tab-btn active" onclick="openTab('quiz')">📝 Quiz Completo</button>
-        <button class="tab-btn" onclick="openTab('jogo')">🎮 Jogo de Associação</button>
-        <button class="tab-btn" onclick="openTab('dissertativas')">✍️ Dissertativas</button>
+        <button class="tab-btn active" onclick="openTab('quiz')">📝 Simulado (50% do Edital)</button>
+        <button class="tab-btn" onclick="openTab('taf')">🏋️️ TAF (% de Meta)</button>
+        <button class="tab-btn" onclick="openTab('perfil')">🧠 Análise de Perfil & Redação</button>
     </div>
 
+    <!-- Aba 1: Quiz -->
     <div id="quiz" class="tab-content active">
         <div id="quiz-container">
-            <h3 id="quiz-status" style="color: var(--primary);">Pergunta 1 de 10</h3>
+            <h3 id="quiz-status" style="color: var(--primary);">Pergunta 1 de 18</h3>
             <div class="question-container">
                 <div id="question" class="question-text">Carregando pergunta...</div>
                 <div id="options" class="options"></div>
@@ -254,150 +235,126 @@
             <button id="next-btn" onclick="nextQuestion()">Próxima Pergunta ➔</button>
         </div>
         <div id="result-container" style="display: none; text-align: center;">
-            <h2>Quiz Finalizado!</h2>
-            <p id="score-text" style="font-size: 20px; font-weight: bold;"></p>
-            <button id="restart-btn" onclick="restartQuiz()" style="display: inline-block;">Refazer Quiz</button>
+            <h2>Simulado Finalizado!</h2>
+            <p id="acertos-text" style="font-size: 18px;"></p>
+            <p id="score-text" style="font-size: 24px; font-weight: bold; color: var(--primary);"></p>
+            <p style="font-size: 14px; color: #555;">(Cálculo proporcional: Acertos / 18 × 32,5 pts)</p>
+            <button id="restart-btn" onclick="restartQuiz()" style="display: inline-block;">Refazer Simulado</button>
         </div>
     </div>
 
-    <div id="jogo" class="tab-content">
-        <h2 style="text-align: center; color: var(--primary);">Associe os Termos Anatômicos</h2>
-        <p style="text-align: center;">Clique em um termo e depois no seu significado correto.</p>
-        <div class="game-grid" id="game-grid">
+    <!-- Aba 2: TAF -->
+    <div id="taf" class="tab-content">
+        <h2 style="text-align: center; color: var(--primary);">Gerador de Cronograma TAF - Meta Escalonável</h2>
+        <p style="text-align: center; font-size: 14px;">Os requisitos mínimos valem 60% dos pontos. Digite a porcentagem que deseja alcançar para calcular a nova meta.</p>
+        
+        <div class="taf-form">
+            <div class="form-group highlight">
+                <label>🔥 Quantos % da nota deseja alcançar?</label>
+                <input type="number" id="taf-porcentagem" value="80" min="60" max="100">
             </div>
-        <p id="game-msg" style="text-align: center; font-weight: bold; margin-top: 20px; color: #48bb78;"></p>
-        <button onclick="initGame()" style="display:block; margin: 20px auto; padding: 10px 20px; background: var(--primary); color: white; border: none; border-radius: 6px; cursor: pointer;">Reiniciar Jogo</button>
+            <div class="form-group">
+                <label>Gênero:</label>
+                <select id="taf-gender">
+                    <option value="M">Masculino</option>
+                    <option value="F">Feminino</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Seu tempo ATUAL Corrida 2km (em minutos):</label>
+                <input type="number" id="taf-corrida" placeholder="Ex: 18">
+            </div>
+            <div class="form-group">
+                <label>Máximo ATUAL de Flexões:</label>
+                <input type="number" id="taf-flexao" placeholder="Ex: 10">
+            </div>
+            <div class="form-group">
+                <label>Máximo ATUAL de Abdominais:</label>
+                <input type="number" id="taf-abd" placeholder="Ex: 15">
+            </div>
+            <div class="form-group">
+                <label>Tempo ATUAL Prancha (em segundos):</label>
+                <input type="number" id="taf-prancha" placeholder="Ex: 30">
+            </div>
+            <button class="gerar-btn" onclick="gerarTreino()">Calcular Meta e Treino Diário (Até 15/10)</button>
+        </div>
+
+        <div id="taf-result"></div>
     </div>
 
-    <div id="dissertativas" class="tab-content">
-        <h2>Perguntas para Reflexão</h2>
-        <p>Responda com suas palavras e depois verifique o gabarito esperado.</p>
+    <!-- Aba 3: Perfil e Redação -->
+    <div id="perfil" class="tab-content">
+        <h2>Simulador de Avaliação: Perfil, Entrevista e Redação</h2>
+        <p>Responda às situações abaixo. Nossa Inteligência Analítica irá avaliar suas palavras-chave, tamanho da resposta e estrutura do texto, gerando um feedback e uma nota simulada.</p>
 
+        <!-- Redação -->
         <div class="dissertativa-item">
-            <h3>1. Explique o que são Zoonoses e cite pelo menos dois exemplos e suas formas de prevenção.</h3>
-            <textarea placeholder="Escreva sua resposta aqui..."></textarea>
-            <button class="show-answer-btn" onclick="toggleAnswer('ans1')">Mostrar Resposta Esperada</button>
-            <div id="ans1" class="answer-box">
-                <strong>Resposta Esperada:</strong> Zoonoses são doenças que passam entre animais e pessoas. Exemplos incluem:<br>
-                - <strong>Raiva:</strong> transmitida por mordidas; prevenção com vacina.<br>
-                - <strong>Leptospirose:</strong> contato com urina de animais infectados; prevenção com higiene e controle de ratos.
-            </div>
+            <h3>1. (Redação - Máx: 18 pontos) Tema: "A importância da hierarquia e disciplina para a eficiência das Forças Armadas no Brasil."</h3>
+            <textarea id="text-redacao" placeholder="Redija sua resposta. Lembre-se que em prova real são de 15 a 25 linhas (digite ao menos 400 caracteres para uma boa nota)..."></textarea>
+            <button class="analisar-btn" onclick="analisarResposta('text-redacao', 'fb-redacao', 'redacao')">Analisar Redação</button>
+            <div id="fb-redacao" class="feedback-box"></div>
         </div>
 
+        <!-- Situação Problema 1 -->
         <div class="dissertativa-item">
-            <h3>2. De acordo com a Psicologia Canina, cite três situações em que o tutor deve procurar ajuda de um profissional.</h3>
-            <textarea placeholder="Escreva sua resposta aqui..."></textarea>
-            <button class="show-answer-btn" onclick="toggleAnswer('ans2')">Mostrar Resposta Esperada</button>
-            <div id="ans2" class="answer-box">
-                <strong>Resposta Esperada:</strong> O tutor deve procurar ajuda em casos de latidos excessivos, agressividade, mau comportamento nos passeios, hostilidade com pessoas e outros animais, ou apatia sem motivo.
-            </div>
+            <h3>2. (Avaliação de Perfil - Máx: 10 pontos) Situação de Liderança: Durante uma missão, sua equipe está exausta e questiona uma ordem direta do seu superior, que parece arriscada. Como você age?</h3>
+            <textarea id="text-perfil1" placeholder="Descreva sua tomada de decisão e controle emocional..."></textarea>
+            <button class="analisar-btn" onclick="analisarResposta('text-perfil1', 'fb-perfil1', 'perfil')">Analisar Perfil</button>
+            <div id="fb-perfil1" class="feedback-box"></div>
         </div>
 
+        <!-- Situação Problema 2 -->
         <div class="dissertativa-item">
-            <h3>3. Qual é a diferença entre estruturas anatômicas homólogas e análogas? Dê um exemplo de cada.</h3>
-            <textarea placeholder="Escreva sua resposta aqui..."></textarea>
-            <button class="show-answer-btn" onclick="toggleAnswer('ans3')">Mostrar Resposta Esperada</button>
-            <div id="ans3" class="answer-box">
-                <strong>Resposta Esperada:</strong> <br>
-                - <strong>Homólogas:</strong> Possuem a mesma origem evolutiva (mesmo ancestral), mas podem ter funções diferentes. Ex: Braço humano e asa do morcego.<br>
-                - <strong>Análogas:</strong> Possuem a mesma função, mas evoluíram separadamente (origens diferentes). Ex: Asa da ave e asa do inseto.
-            </div>
+            <h3>3. (Avaliação de Perfil - Máx: 10 pontos) Situação de Honestidade: Durante um simulado eliminatório no alojamento, você flagra um colega de equipe (e grande amigo) consultando um gabarito proibido. O que você faz?</h3>
+            <textarea id="text-perfil2" placeholder="Avaliaremos sua honestidade e responsabilidade..."></textarea>
+            <button class="analisar-btn" onclick="analisarResposta('text-perfil2', 'fb-perfil2', 'perfil')">Analisar Perfil</button>
+            <div id="fb-perfil2" class="feedback-box"></div>
+        </div>
+
+        <!-- Entrevista Final -->
+        <div class="dissertativa-item">
+            <h3>4. (Entrevista Final - Máx: 10 pontos) "Candidato, por que você deseja ingressar na Instituição e seguir carreira militar?"</h3>
+            <textarea id="text-entrevista" placeholder="Escreva como você falaria. Demonstre firmeza, motivação, e propósito..."></textarea>
+            <button class="analisar-btn" onclick="analisarResposta('text-entrevista', 'fb-entrevista', 'entrevista')">Analisar Entrevista</button>
+            <div id="fb-entrevista" class="feedback-box"></div>
         </div>
     </div>
 </div>
 
 <script>
-    // --- LÓGICA DAS ABAS ---
+    // --- NAVEGAÇÃO DE ABAS ---
     function openTab(tabName) {
         document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
         document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-        
         document.getElementById(tabName).classList.add('active');
         event.currentTarget.classList.add('active');
     }
 
-    // --- LÓGICA DO QUIZ ---
+    // --- LÓGICA DO QUIZ (18 Questões = 50% do Edital) ---
     const questions = [
-        {
-            question: "Sobre o exercício da profissão, o que o auxiliar veterinário NÃO pode fazer?",
-            options: [
-                "Auxiliar nos cuidados básicos com os animais.",
-                "Realizar procedimentos clínicos e cirúrgicos.",
-                "Trabalhar com a organização da clínica.",
-                "Aplicar medidas de biossegurança."
-            ],
-            answer: 1
-        },
-        {
-            question: "Qual é a sequência correta das 5 Liberdades do Bem-Estar Animal?",
-            options: [
-                "Fome/Sede → Dor/Doenças → Desconforto → Comportamento → Medo",
-                "Comportamento → Fome/Sede → Desconforto → Medo → Dor/Doenças",
-                "Medo → Fome/Sede → Comportamento → Dor/Doenças → Desconforto",
-                "Fome/Sede → Desconforto → Medo → Dor/Doenças → Comportamento"
-            ],
-            answer: 0
-        },
-        {
-            question: "A Esporotricose é uma zoonose causada por um fungo. Qual animal é o principal transmissor?",
-            options: ["Cachorro", "Rato", "Gato", "Morcego"],
-            answer: 2
-        },
-        {
-            question: "Quais são os EPIs (Equipamentos de Proteção Individual) básicos citados na biossegurança?",
-            options: [
-                "Luvas, Capacete, Bota e Máscara.",
-                "Luvas, Máscara, Óculos e Jaleco.",
-                "Jaleco, Bota, Óculos e Avental de chumbo.",
-                "Máscara, Óculos, Capacete e Luvas."
-            ],
-            answer: 1
-        },
-        {
-            question: "Na psicologia felina, quais são características comuns aos gatos?",
-            options: [
-                "Não têm memória e dependem exclusivamente da raça.",
-                "São sempre extrovertidos e barulhentos.",
-                "Grande memória, inteligentes, cautelosos e de personalidade forte.",
-                "Apendem com dificuldade e ignoram a linguagem corporal."
-            ],
-            answer: 2
-        },
-        {
-            question: "Qual raça canina possui origem na Alemanha, tem aptidão para guarda e apresenta predisposição à Displasia de quadril?",
-            options: ["Golden Retriever", "Pug", "Labrador", "Rottweiler"],
-            answer: 3
-        },
-        {
-            question: "Os gatos da raça Persa têm pelagem longa e podem viver até 14 anos. Qual é a sua principal predisposição à doença?",
-            options: [
-                "Tricobezoar (bola de pelos).",
-                "Displasia coxofemoral.",
-                "Cálculos urinários.",
-                "Predisposição ao câncer de mama."
-            ],
-            answer: 0
-        },
-        {
-            question: "Na anatomia, qual é a ordem correta dos níveis de organização, do menor para o maior?",
-            options: [
-                "Tecido → Célula → Órgão → Organismo → Sistema",
-                "Célula → Tecido → Órgão → Sistema → Organismo",
-                "Órgão → Sistema → Tecido → Célula → Organismo",
-                "Célula → Órgão → Tecido → Sistema → Organismo"
-            ],
-            answer: 1
-        },
-        {
-            question: "Como é classificado o tipo de crânio de cães com cabeça curta e focinho achatado (ex: Pug e Shih Tzu)?",
-            options: ["Braquicefálico", "Dolicocefálico", "Mesocefálico", "Homólogo"],
-            answer: 0
-        },
-        {
-            question: "Como são chamadas as estruturas que perderam sua função principal ao longo da evolução (ex: ossos da pelve das baleias)?",
-            options: ["Estruturas Análogas", "Características Homólogas", "Estruturas Vestigiais", "Estruturas Ectotérmicas"],
-            answer: 2
-        }
+        // LÍNGUA PORTUGUESA (4 questões)
+        { question: "(Português) Indique a frase com o emprego correto do acento indicativo de crase:", options: ["Ficamos frente à frente.", "O relatório foi entregue à todos.", "O soldado retornou à base militar.", "A cerimônia ocorreu as 15h."], answer: 2 },
+        { question: "(Português) Em relação à concordância (verbo haver), assinale a correta:", options: ["Haverão muitos testes no TAF amanhã.", "Havia muitos candidatos no pátio.", "Haviam acontecido falhas no sistema.", "Vai haverem punições aos insubordinados."], answer: 1 },
+        { question: "(Português) O uso dos porquês está correto na alternativa:", options: ["Por que você quer ser militar?", "Não sei o por que de tanto rigor.", "Ele faltou a formatura porque?", "Estudo porquê quero aprovação."], answer: 0 },
+        { question: "(Português) Sobre pontuação, assinale a correta (uso da vírgula no vocativo/aposto):", options: ["Senhor comandante solicito, permissão.", "João, o melhor atirador do pelotão foi promovido.", "Candidato, mantenha a posição de sentido.", "A tropa marchou, em direção, ao campo."], answer: 2 },
+        // MATEMÁTICA (4 questões)
+        { question: "(Matemática) O valor da expressão 15 + 5 × (8 - 4) é:", options: ["80", "35", "60", "20"], answer: 1 },
+        { question: "(Matemática) Simplificando a fração 48/64, obtemos:", options: ["3/4", "2/3", "4/5", "6/8"], answer: 0 },
+        { question: "(Matemática) Um curso custa R$ 1.200, mas militares têm 15% de desconto. Qual o valor pago?", options: ["R$ 1.050", "R$ 1.020", "R$ 980", "R$ 1.185"], answer: 1 },
+        { question: "(Matemática) Uma viatura percorre 180 km em 2 horas. Se mantiver a velocidade média, em quanto tempo fará 450 km?", options: ["4 horas", "4,5 horas", "5 horas", "6 horas"], answer: 2 },
+        // GEOGRAFIA (3 questões)
+        { question: "(Geografia) Devido à sua extensão territorial, o Brasil possui quantos fusos horários oficiais?", options: ["2", "3", "4", "5"], answer: 2 },
+        { question: "(Geografia) Qual bioma é conhecido por sua vegetação adaptada à seca extrema (xerófila) e é exclusivo do Brasil?", options: ["Cerrado", "Caatinga", "Pampa", "Pantanal"], answer: 1 },
+        { question: "(Geografia) Na Rosa dos Ventos, o ponto colateral situado entre o Norte e o Leste é o:", options: ["Nordeste", "Noroeste", "Sudeste", "Sudoeste"], answer: 0 },
+        // HISTÓRIA (2 questões)
+        { question: "(História) A Proclamação da República, que pôs fim ao Império do Brasil, foi liderada por:", options: ["Dom Pedro II", "Marechal Deodoro da Fonseca", "Duque de Caxias", "Tiradentes"], answer: 1 },
+        { question: "(História) É considerado o Patrono do Exército Brasileiro e teve papel fundamental na consolidação do território nacional:", options: ["Almirante Tamandaré", "Marechal Rondon", "Duque de Caxias", "Brigadeiro Eduardo Gomes"], answer: 2 },
+        // MILITARISMO (5 questões)
+        { question: "(Militarismo) Segundo a Constituição, qual a missão primordial das Forças Armadas?", options: ["Patrulhamento ostensivo nas ruas dos Estados.", "A Defesa da Pátria e a garantia dos poderes constitucionais.", "Administração do sistema prisional e de fronteiras.", "Investigação de crimes cibernéticos estaduais."], answer: 1 },
+        { question: "(Militarismo) Sobre a hierarquia, é correto afirmar:", options: ["Postos são atribuídos aos Praças; Graduações aos Oficiais.", "Postos são graus hierárquicos dos Oficiais; Graduações são dos Praças.", "A disciplina é superior à hierarquia no militarismo.", "Civis têm precedência hierárquica sobre Sargentos em área militar."], answer: 1 },
+        { question: "(Militarismo) Qual corporação atua como força auxiliar e reserva do Exército Brasileiro, responsável pela preservação da ordem pública?", options: ["Polícia Federal", "Polícia Civil", "Polícia Militar", "Guarda Municipal"], answer: 2 },
+        { question: "(Militarismo) Quanto ao cumprimento de ordens legais no ambiente militar:", options: ["Ordens podem ser discutidas caso o subordinado não concorde.", "O pronto cumprimento de ordens legais é dever estrito do militar.", "A obediência só é exigida em tempo de guerra.", "Ordens superiores são opcionais para oficiais subalternos."], answer: 1 },
+        { question: "(Militarismo) As Forças Armadas Brasileiras são compostas por:", options: ["Exército, Polícia Militar e Corpo de Bombeiros.", "Marinha, Exército e Aeronáutica.", "Marinha, Força Nacional e Aeronáutica.", "Exército, Aeronáutica e Polícia Federal."], answer: 1 }
     ];
 
     let currentQuestion = 0;
@@ -407,7 +364,7 @@
     function loadQuestion() {
         answered = false;
         document.getElementById("next-btn").style.display = "none";
-        document.getElementById("quiz-status").innerText = `Pergunta ${currentQuestion + 1} de ${questions.length}`;
+        document.getElementById("quiz-status").innerText = `Pergunta ${currentQuestion + 1} de 18`;
         
         const q = questions[currentQuestion];
         document.getElementById("question").innerText = q.question;
@@ -433,9 +390,7 @@
         
         buttons.forEach((btn, idx) => {
             btn.disabled = true;
-            if (idx === correctIndex) {
-                btn.classList.add("correct");
-            }
+            if (idx === correctIndex) btn.classList.add("correct");
         });
 
         if (selectedIndex === correctIndex) {
@@ -443,7 +398,6 @@
         } else {
             btnElement.classList.add("wrong");
         }
-
         document.getElementById("next-btn").style.display = "block";
     }
 
@@ -454,7 +408,11 @@
         } else {
             document.getElementById("quiz-container").style.display = "none";
             document.getElementById("result-container").style.display = "block";
-            document.getElementById("score-text").innerText = `Você acertou ${score} de ${questions.length} questões!`;
+            
+            let notaEscalonada = ((score / 18) * 32.5).toFixed(1);
+            
+            document.getElementById("acertos-text").innerText = `Você acertou ${score} de 18 questões!`;
+            document.getElementById("score-text").innerText = `Pontuação Final: ${notaEscalonada} / 32,5 pts`;
         }
     }
 
@@ -465,91 +423,194 @@
         document.getElementById("result-container").style.display = "none";
         loadQuestion();
     }
-
-    // Inicializa o Quiz
     loadQuestion();
 
 
-    // --- LÓGICA DO JOGO (Associação) ---
-    const gamePairs = [
-        { id: 1, text: "Cranial" }, { id: 1, text: "Direção à cabeça" },
-        { id: 2, text: "Caudal" }, { id: 2, text: "Direção à cauda" },
-        { id: 3, text: "Dorsal" }, { id: 3, text: "Parte de cima (costas)" },
-        { id: 4, text: "Ventral" }, { id: 4, text: "Parte de baixo (barriga)" }
-    ];
+    // --- LÓGICA DO GERADOR DE TAF COM % ---
+    function gerarTreino() {
+        const percDesejado = parseFloat(document.getElementById("taf-porcentagem").value) || 60;
+        const genero = document.getElementById("taf-gender").value;
+        const corridaAtual = parseFloat(document.getElementById("taf-corrida").value) || 0;
+        const flexaoAtual = parseInt(document.getElementById("taf-flexao").value) || 0;
+        const abdAtual = parseInt(document.getElementById("taf-abd").value) || 0;
+        const pranchaAtual = parseInt(document.getElementById("taf-prancha").value) || 0;
 
-    let firstCard = null;
-    let matchedPairs = 0;
+        const baseCorrida = 15; 
+        const baseFlexao = genero === "M" ? 17 : 13;
+        const baseAbd = genero === "M" ? 25 : 18;
+        const basePrancha = 60; 
 
-    function shuffle(array) {
-        return array.sort(() => Math.random() - 0.5);
-    }
+        const metaFlexao = Math.ceil(baseFlexao * (percDesejado / 60));
+        const metaAbd = Math.ceil(baseAbd * (percDesejado / 60));
+        const metaPrancha = Math.ceil(basePrancha * (percDesejado / 60));
+        const metaCorrida = (baseCorrida * (60 / percDesejado)).toFixed(1);
 
-    function initGame() {
-        const grid = document.getElementById("game-grid");
-        grid.innerHTML = "";
-        document.getElementById("game-msg").innerText = "";
-        firstCard = null;
-        matchedPairs = 0;
+        const diasRestantes = 11; 
 
-        const shuffled = shuffle([...gamePairs]);
+        let html = `<h3>📈 Relatório TAF (Meta: ${percDesejado}% da nota | Faltam 11 dias)</h3><ul>`;
 
-        shuffled.forEach(item => {
-            const card = document.createElement("div");
-            card.className = "card";
-            card.innerText = item.text;
-            card.dataset.id = item.id;
-            card.onclick = () => handleCardClick(card);
-            grid.appendChild(card);
-        });
-    }
-
-    function handleCardClick(card) {
-        if (card.classList.contains("matched") || card === firstCard) return;
-
-        card.classList.add("selected");
-
-        if (!firstCard) {
-            firstCard = card;
+        if (corridaAtual > metaCorrida) {
+            let corteDiario = ((corridaAtual - metaCorrida) / diasRestantes).toFixed(2);
+            html += `<li><strong>🏃 Corrida:</strong> Meta ajustada para <strong>${metaCorrida} min</strong> (Atual: ${corridaAtual}). Precisa diminuir ${corteDiario} min por dia. Foco em tiros intervalados!</li>`;
         } else {
-            const firstId = firstCard.dataset.id;
-            const secondId = card.dataset.id;
+            html += `<li><strong>🏃 Corrida:</strong> EXCELENTE! Você já bate a meta de ${metaCorrida} min. Faça apenas manutenção.</li>`;
+        }
 
-            if (firstId === secondId) {
-                // Acertou
-                firstCard.classList.remove("selected");
-                firstCard.classList.add("matched");
-                card.classList.remove("selected");
-                card.classList.add("matched");
-                matchedPairs++;
-                firstCard = null;
+        if (flexaoAtual < metaFlexao) {
+            let addDiario = Math.ceil((metaFlexao - flexaoAtual) / diasRestantes);
+            html += `<li><strong>💪 Flexão:</strong> Meta ajustada para <strong>${metaFlexao} reps</strong> (Atual: ${flexaoAtual}). Faça +${addDiario} flexões extras por dia no seu limite.</li>`;
+        } else {
+            html += `<li><strong>💪 Flexão:</strong> EXCELENTE! Você já faz ${flexaoAtual} (Meta: ${metaFlexao}).</li>`;
+        }
 
-                if (matchedPairs === 4) {
-                    document.getElementById("game-msg").innerText = "Parabéns! Você associou todos os termos corretamente!";
-                }
+        if (abdAtual < metaAbd) {
+            let addAbd = Math.ceil((metaAbd - abdAtual) / diasRestantes);
+            html += `<li><strong>🔥 Abdominal:</strong> Meta ajustada para <strong>${metaAbd} reps</strong> (Atual: ${abdAtual}). Aumente +${addAbd} repetições por dia.</li>`;
+        } else {
+            html += `<li><strong>🔥 Abdominal:</strong> EXCELENTE! Você supera a meta de ${metaAbd}.</li>`;
+        }
+
+        if (pranchaAtual < metaPrancha) {
+            let addS = Math.ceil((metaPrancha - pranchaAtual) / diasRestantes);
+            html += `<li><strong>⏱️ Prancha:</strong> Meta ajustada para <strong>${metaPrancha}s</strong> (Atual: ${pranchaAtual}s). Resista +${addS} segundos a mais por dia!</li>`;
+        } else {
+            html += `<li><strong>⏱️️ Prancha:</strong> EXCELENTE! Já atinge os ${metaPrancha}s exigidos.</li>`;
+        }
+
+        html += `</ul><p style="font-size:13px; color:#555;">Descansar na véspera da prova também faz parte do cronograma estratégico!</p>`;
+        
+        const box = document.getElementById("taf-result");
+        box.innerHTML = html;
+        box.style.display = "block";
+    }
+
+    // --- ANALISADOR REFINADO (REDAÇÃO E PERFIL) ---
+    function analisarResposta(textId, resultId, tipo) {
+        const text = document.getElementById(textId).value.trim();
+        const box = document.getElementById(resultId);
+        
+        if (text.length < 15) {
+            box.innerHTML = `<span style="color: red;">Erro: Resposta muito curta para ser analisada.</span>`;
+            box.style.display = "block";
+            return;
+        }
+
+        let score = 0;
+        let maxScore = tipo === 'redacao' ? 18 : 10;
+        let feedback = "";
+        
+        const keywords = [
+            'disciplina', 'hierarquia', 'equipe', 'honra', 'ética', 'regulamento', 
+            'ordem', 'superior', 'superiores', 'missão', 'pátria', 'país', 'segurança', 
+            'responsabilidade', 'correto', 'exemplo', 'instituição', 'verdade', 
+            'sincero', 'sinceridade', 'lealdade', 'pilares', 'valores', 'subordinado', 
+            'subordinados', 'regras', 'transparência', 'informar', 'informaria'
+        ];
+        
+        const textLower = text.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        const keywordsNormalized = keywords.map(k => k.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""));
+        
+        let foundKeywords = keywordsNormalized.filter(k => textLower.includes(k));
+        let keywordScore = foundKeywords.length;
+
+        // Contagem de frases/períodos concluídos
+        const frases = text.split('.').filter(f => f.trim().length > 0).length;
+
+        if (tipo === 'redacao') {
+            // CRITÉRIOS DE REDAÇÃO (Máx 18 pts)
+            // 1. Extensão do texto (até 8 pts)
+            if (text.length >= 400) { 
+                score += 8; 
+                feedback += "✅ Excelente extensão e desenvolvimento do tema (+8 pts).<br>"; 
+            } else if (text.length >= 220) { 
+                score += 5; 
+                feedback += "⚠️ Tamanho mediano. Desenvolva melhor os parágrafos para uma redação completa (+5 pts).<br>"; 
+            } else { 
+                score += 2; 
+                feedback += "❌ Texto muito curto para uma redação (apenas uma introdução ou frase única) (+2 pts).<br>"; 
+            }
+
+            // 2. Vocabulário Institucional (até 6 pts)
+            if (keywordScore >= 4 && text.length >= 220) { 
+                score += 6; 
+                feedback += "✅ Uso rico de conceitos e doutrina militar (+6 pts).<br>"; 
+            } else if (keywordScore >= 2) { 
+                score += 3; 
+                feedback += "⚠️ Argumentação básica. Inclua mais conceitos institucionais (+3 pts).<br>"; 
+            } else { 
+                score += 1; 
+                feedback += "❌ Faltaram termos essenciais sobre hierarquia e disciplina (+1 pt).<br>"; 
+            }
+            
+            // 3. Estrutura de frases e pontuação (até 4 pts)
+            if (frases >= 3) { 
+                score += 4; 
+                feedback += "✅ Boa estruturação em múltiplos períodos (+4 pts).<br>"; 
+            } else if (frases >= 1) { 
+                score += 2; 
+                feedback += "⚠️ Construção muito direta. Separe e detalhe melhor suas ideias em mais frases (+2 pts).<br>"; 
+            }
+
+        } else if (tipo === 'perfil') {
+            // CRITÉRIOS DE PERFIL (Máx 10 pts)
+            // 1. Extensão e Completabilidade (até 4 pts)
+            if (text.length >= 220) { 
+                score += 4; 
+                feedback += "✅ Resposta detalhada cobrindo a ação do início ao fim (+4 pts).<br>"; 
+            } else if (text.length >= 100) { 
+                score += 2; 
+                feedback += "⚠️ Resposta um pouco sucinta. Detalhe melhor a solução e o desfecho (+2 pts).<br>"; 
+            } else { 
+                score += 1; 
+                feedback += "❌ Resposta incompleta ou interrompida antes do desfecho (+1 pt).<br>"; 
+            }
+
+            // 2. Postura e Conceitos (até 6 pts)
+            if (keywordScore >= 3 && text.length >= 150) { 
+                score += 6; 
+                feedback += "✅ Postura exemplar alinhada aos pilares da instituição (+6 pts).<br>"; 
+            } else if (keywordScore >= 1) { 
+                score += 3; 
+                feedback += "⚠️ Apresentou boas intenções, mas faltou aprofundar a conduta ética (+3 pts).<br>"; 
+            } else { 
+                score += 1; 
+                feedback += "❌ Conduta não demonstrou claramente os valores exigidos (+1 pt).<br>"; 
+            }
+            
+        } else if (tipo === 'entrevista') {
+            // CRITÉRIOS DE ENTREVISTA (Máx 10 pts)
+            if (text.length >= 150) { 
+                score += 4; 
+                feedback += "✅ Boa fundamentação do propósito e motivação (+4 pts).<br>"; 
+            } else { 
+                score += 2; 
+                feedback += "⚠️️ Muito breve. A banca busca entender sua convicção na carreira (+2 pts).<br>"; 
+            }
+
+            const cliches = ['salario', 'dinheiro', 'estabilidade'];
+            if (cliches.some(c => textLower.includes(c))) {
+                score += 1; 
+                feedback += "❌ Evite focar em 'estabilidade' ou 'salário' na entrevista (+1 pt).<br>";
+            } else if (keywordScore >= 2) {
+                score += 6; 
+                feedback += "✅ Demonstrou vocação, patriotismo e compromisso (+6 pts).<br>";
             } else {
-                // Errou
-                const tempFirst = firstCard;
-                firstCard = null;
-                setTimeout(() => {
-                    tempFirst.classList.remove("selected");
-                    card.classList.remove("selected");
-                }, 800);
+                score += 3; 
+                feedback += "⚠️ Resposta neutra. Mostre mais firmeza e vocação (+3 pts).<br>";
             }
         }
-    }
 
-    // Inicializa o Jogo
-    initGame();
+        if (score > maxScore) score = maxScore;
 
-    // --- LÓGICA DAS DISSERTATIVAS ---
-    function toggleAnswer(id) {
-        const box = document.getElementById(id);
-        if (box.style.display === "block") {
-            box.style.display = "none";
-        } else {
-            box.style.display = "block";
-        }
+        let badgeColor = score >= (maxScore * 0.7) ? 'var(--success)' : (score >= (maxScore * 0.5) ? 'var(--warning)' : 'var(--danger)');
+
+        box.innerHTML = `
+            <div class="score-badge" style="background: ${badgeColor};">Nota Simulada: ${score} / ${maxScore} pts</div>
+            <br>
+            <strong>🔍 Análise do Avaliador (IA):</strong><br>
+            ${feedback}
+        `;
+        box.style.display = "block";
     }
 </script>
 
